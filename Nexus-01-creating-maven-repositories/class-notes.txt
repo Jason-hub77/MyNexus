@@ -1,0 +1,81 @@
+$ sudo yum update -y
+```
+$ sudo yum install java-1.8.0-openjdk -y
+```
+$ sudo wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+```
+$ ec2-user@ip-172-31-81-239:~$ ls /etc/yum.repos.d/
+amzn2-core.repo  amzn2-extras.repo  epel-apache-maven.repo
+```
+$ sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+```
+$ cat /etc/yum.repos.d/epel-apache-maven.repo
+Veya 
+$ cd /etc/yum.repos.d/
+```
+$ cat epel-apache-maven.repo 
+```
+# Place this file in your /etc/yum.repos.d/ directory
+
+[epel-apache-maven]
+name=maven from apache foundation.
+baseurl=http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-6/$basearch/ # ***6 oldu*****
+enabled=1
+skip_if_unavailable=1
+gpgcheck=0
+
+[epel-apache-maven-source]
+name=maven from apache foundation. - Source
+baseurl=http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-6/SRPMS # ***6 oldu*****
+enabled=0
+skip_if_unavailable=1
+gpgcheck=0
+
+```
+$ cd /opt
+$ sudo yum install apache-maven -y
+$ mvn -version
+$ whereis mvn
+
+Yüklemezse
+$ sudo yum update -y
+```
+$ cd /opt
+$ sudo wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+```
+$ ls
+```
+$ sudo tar xvzf nexus.tar.gz # ziptek çıkardık.
+$ ls
+$ sudo rm nexus.tar.gz # zipliyi sildik.
+$ ls
+$ sudo mv nexus-3* nexus # ismi garipti düzelttik.
+```
+$ ll
+$ sudo chown -R ec2-user:ec2-user /opt/nexus
+$ sudo chown -R ec2-user:ec2-user /opt/sonatype-work
+$ ll
+```
+$ cd /opt/nexus/bin
+```
+$ ls
+```
+$ sudo nano /opt/nexus/bin/nexus.rc
+```
+"run_as_user="ec2-user"
+
+$ ls # nexus yeşil
+```
+$ export PATH=$PATH:/opt/nexus/bin
+$ echo $PATH
+$ cd /opt
+$ nexus start
+```
+$
+```
+$ 
+```
+$
+```
+$ help.sonatype.com/repomanager3/installation/installation-methods
+
